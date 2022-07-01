@@ -15,12 +15,15 @@ async function timeElapsedTotal(pages) {
 
 async function timeElapsed(page = 0){
    let headers = new Headers();
-   let username = secrets.username;
-   let password = secrets.password;
+   let {
+      username,
+      password,
+      repo,
+   } = secrets;
 
    headers.set('Authorization', 'Basic ' + base64.encode(username + ":" + password));
 
-   let response = await fetch(`https://api.github.com/repos/docker/mercury-ui/pulls?state=closed&per_page=100&page=${page}`, {
+   let response = await fetch(`https://api.github.com/repos/${repo}/pulls?state=closed&per_page=100&page=${page}`, {
       method: 'GET',
       headers,
    });
